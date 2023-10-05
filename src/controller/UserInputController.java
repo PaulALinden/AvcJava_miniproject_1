@@ -1,5 +1,6 @@
 package controller;
 
+import model.AbstractDateTime;
 import model.Date;
 import model.DateTimeState;
 import model.Time;
@@ -8,29 +9,44 @@ import java.time.LocalDateTime;
 
 public class UserInputController {
 
-    private final LocalDateTime currentDateTime = LocalDateTime.now();
-    private final Time myTime = new Time(currentDateTime, DateTimeState.CHANGE_MODE);
-    private final Date myDate = new Date(currentDateTime, DateTimeState.CHANGE_MODE);
+    private final LocalDateTime CURRENTDATETIME = LocalDateTime.now();
+    private final Time MYTIME = new Time(CURRENTDATETIME, DateTimeState.CHANGE_MODE);
+    private final Date MYDATE = new Date(CURRENTDATETIME, DateTimeState.CHANGE_MODE);
 
     public String handelUserInput(@org.jetbrains.annotations.NotNull String input) {
         String result = null;
 
-        switch (input) {
-            case "CHANGE_MODE" -> changeMode();
-            case "DISPLAY_TIME" -> result = giveTime();
-            case "DISPLAY_DATE" -> result = giveDate();
-            case "CHANGE_TIME" -> result = newTime();
-            case "CHANGE_DATE" -> result = newDate();
-            default -> result = "wrong input";
-        }
-        return result;
-    }
+            switch (input) {
+                case "CHANGE_MODE" -> result = changeMode(MYTIME, MYDATE);
+                case "DISPLAY_TIME" -> result = giveTime(MYTIME, MYDATE);
+                case "DISPLAY_DATE" -> result = giveDate(MYTIME, MYDATE);
+                case "CHANGE_TIME" -> {
+                    if (newTime(MYTIME, MYDATE)) {
+                        result = giveTime(MYTIME, MYDATE);
+                    } else {
+                        result = "Error";
+                    }
+                }
+                case "CHANGE_DATE" -> {
+                    if (newDate(MYTIME, MYDATE)) {
+                        result = giveDate(MYTIME, MYDATE);
+                    } else {
+                        result = "Error";
+                    }
+                }
+                case "TERMINATE" -> System.exit(0);
+                default -> result = "wrong input";
+            }
+            return result;
 
-    private void changeMode() {
+    }
+    private String changeMode(Time myTime, Date myDate) {
         myTime.setState(DateTimeState.CHANGE_MODE);
         myDate.setState(DateTimeState.CHANGE_MODE);
+
+        return "CHOOSE MODE";
     }
-    private String giveTime() {
+    private String giveTime(Time myTime, Date myDate) {
         if (myDate.getState() == DateTimeState.CHANGE_MODE) {
             myTime.setState(DateTimeState.DISPLAY_TIME);
             return myTime.display();
@@ -38,7 +54,7 @@ public class UserInputController {
             return "Error in state";
         }
     }
-    private String giveDate() {
+    private String giveDate(Time myTime, Date myDate) {
         if (myTime.getState() == DateTimeState.CHANGE_MODE) {
             myDate.setState(DateTimeState.DISPLAY_DATE);
             return myDate.display();
@@ -46,7 +62,7 @@ public class UserInputController {
             return "Error in state";
         }
     }
-    private String newDate() {
+    private boolean newDate(Time myTime, Date myDate) {
         if (myTime.getState() == DateTimeState.CHANGE_MODE) {
             myDate.setState(DateTimeState.CHANGE_DATE);
 
@@ -54,15 +70,15 @@ public class UserInputController {
             int newMonth = 12;
             int newDay = 27;
 
-            LocalDateTime modifiedDateTime = currentDateTime.withYear(newYear).withMonth(newMonth).withDayOfMonth(newDay);
+            LocalDateTime modifiedDateTime = CURRENTDATETIME.withYear(newYear).withMonth(newMonth).withDayOfMonth(newDay);
 
             myDate.change(modifiedDateTime);
-            return "Date changed";
+            return true;
         } else {
-            return "Error in state";
+            return false;
         }
     }
-    private String newTime() {
+    private boolean newTime(Time myTime, Date myDate) {
         if (myDate.getState() == DateTimeState.CHANGE_MODE) {
             myTime.setState(DateTimeState.CHANGE_TIME);
 
@@ -70,14 +86,14 @@ public class UserInputController {
             int newMinute = 1;
             int newSecond = 0;
 
-            LocalDateTime modifiedDateTime = currentDateTime.withHour(newHour).withMinute(newMinute).withSecond(newSecond);
+            LocalDateTime modifiedDateTime = CURRENTDATETIME.withHour(newHour).withMinute(newMinute).withSecond(newSecond);
 
             System.out.println(modifiedDateTime);
             myTime.change(modifiedDateTime);
 
-            return "Time changed";
+            return true;
         } else {
-            return "Error in state";
+            return false;
         }
     }
 }

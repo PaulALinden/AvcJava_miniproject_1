@@ -1,6 +1,8 @@
 package model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class Date extends AbstractDateTime {
@@ -10,20 +12,16 @@ public class Date extends AbstractDateTime {
 
     @Override
     public String display() {
-        if (state == DateTimeState.DISPLAY_DATE) {
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            return "Date: " + value.format(dateFormatter);
-        } else {
-            return "Invalid state of Date";
-        }
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm");
+        return "Date: " + value.format(timeFormatter);
     }
 
     @Override
     public void change(LocalDateTime newValue) {
-        if (state == DateTimeState.CHANGE_DATE) {
-            this.value = newValue;
-        } else {
-            System.out.println("Error when setting time");
-        }
+
+        LocalTime timeComponent = value.toLocalTime();
+        LocalDate newDateComponent = newValue.toLocalDate();
+
+        value = newDateComponent.atTime(timeComponent);
     }
 }

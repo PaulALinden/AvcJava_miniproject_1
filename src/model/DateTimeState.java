@@ -5,5 +5,7 @@ public enum DateTimeState {
         DISPLAY_TIME,
         CHANGE_TIME,
         DISPLAY_DATE,
-        CHANGE_DATE
+        CHANGE_DATE,
+        TERMINATE,
+        STATES
 }
