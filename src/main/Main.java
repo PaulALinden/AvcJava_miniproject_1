@@ -13,7 +13,9 @@ public class Main {
         while (true) {
             System.out.println("Write:");
             String a = scanner.nextLine();
-            if (a.equals("q")){return;}
+            if (a.equals("q")) {
+                return;
+            }
 
             userInputController.handelUserInput(a);
         }
