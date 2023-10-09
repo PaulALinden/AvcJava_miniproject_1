@@ -1,20 +1,21 @@
-package model;
+package model.DateTimeManagers;
+
+import model.DateTimeMode;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class Time extends AbstractDateTime {
+public class TimeManager extends DateTimeBase {
 
-    public Time(LocalDateTime value, DateTimeState state) {
+    public TimeManager(LocalDateTime value, DateTimeMode state) {
         super(value, state);
     }
 
     @Override
     public String display() {
-            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm");
-            return "Time: " + value.format(timeFormatter);
+            return value.format(DateTimeFormatter.ofPattern("HH:mm"));
     }
     @Override
     public void change(LocalDateTime newValue) {
