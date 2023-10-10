@@ -14,10 +14,18 @@ public abstract class DateTimeBase implements DateTimeInterface {
         DateTimeBase.value = value;
     }
 
+    public static LocalDateTime getValue() {
+        return value;
+    }
+    public static void setValue(LocalDateTime value) {
+        DateTimeBase.value = value;
+    }
+
     public DateTimeMode getState() {
         return state;
     }
     public void setState(DateTimeMode state) {
         this.state = state;
     }
+
 }

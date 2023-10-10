@@ -1,5 +1,6 @@
 package main;
 
+import Utilitys.DateTimeUpdater;
 import controller.DateTimeHandlers.DateHandler;
 import controller.DateTimeHandlers.DateTimeHandler;
 import controller.DateTimeHandlers.TimeHandler;
@@ -18,6 +19,8 @@ public class Main {
         SwingUtilities.invokeLater(() -> {
             final DateTimeBase myTime = new TimeManager(LocalDateTime.now(), DateTimeMode.DISPLAY_DATE);
             final DateTimeBase myDate = new DateManager(LocalDateTime.now(), DateTimeMode.CHANGE_MODE);
+
+            DateTimeUpdater.startUpdatingValue();
 
             final DateTimeHandler timeHandler = new TimeHandler(myTime, myDate);
             final DateTimeHandler dateHandler = new DateHandler(myTime, myDate);
