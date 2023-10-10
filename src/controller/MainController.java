@@ -21,10 +21,7 @@ public class MainController {
 
     public String handelUserAction(String input) {
 
-        DateTimeHandler manager = (input.equals(DateTimeMode.DISPLAY_TIME.name()) ||
-                input.equals(DateTimeMode.CHANGE_TIME.name())) ?
-                timeHandler :
-                dateHandler;
+        DateTimeHandler manager = (input.equals(DateTimeMode.DISPLAY_TIME.name()) || input.equals(DateTimeMode.CHANGE_TIME.name())) ? timeHandler : dateHandler;
 
 
         return switch (DateTimeMode.valueOf(input)) {

@@ -4,7 +4,7 @@ import model.DateTimeManagers.DateTimeBase;
 
 public abstract class DateTimeHandler {
     protected DateTimeBase myTime;
-    protected DateTimeBase myDate ;
+    protected DateTimeBase myDate;
 
     public DateTimeHandler(DateTimeBase myTime, DateTimeBase myDate) {
         this.myTime = myTime;

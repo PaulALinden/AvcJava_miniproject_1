@@ -9,6 +9,7 @@ public abstract class DateTimeBase implements DateTimeInterface {
 
     static LocalDateTime value;
     protected DateTimeMode state;
+
     public DateTimeBase(LocalDateTime value, DateTimeMode state) {
         this.state = state;
         DateTimeBase.value = value;
@@ -17,6 +18,7 @@ public abstract class DateTimeBase implements DateTimeInterface {
     public static LocalDateTime getValue() {
         return value;
     }
+
     public static void setValue(LocalDateTime value) {
         DateTimeBase.value = value;
     }
@@ -24,6 +26,7 @@ public abstract class DateTimeBase implements DateTimeInterface {
     public DateTimeMode getState() {
         return state;
     }
+
     public void setState(DateTimeMode state) {
         this.state = state;
     }

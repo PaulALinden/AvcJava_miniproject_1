@@ -8,8 +8,17 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateManager extends DateTimeBase {
-    public DateManager(LocalDateTime value, DateTimeMode state) {
+    private static DateManager instance;
+
+    private DateManager(LocalDateTime value, DateTimeMode state) {
         super(value, state);
+    }
+
+    public static DateManager getInstance() {
+        if (instance == null) {
+            instance = new DateManager(LocalDateTime.now(), DateTimeMode.CHANGE_MODE);
+        }
+        return instance;
     }
 
     @Override

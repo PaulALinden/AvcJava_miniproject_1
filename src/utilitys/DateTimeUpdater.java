@@ -1,4 +1,4 @@
-package Utilitys;
+package utilitys;
 
 import model.DateTimeManagers.DateTimeBase;
 
@@ -13,7 +13,7 @@ public class DateTimeUpdater {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
         scheduler.scheduleAtFixedRate(() -> {
-            LocalDateTime newValue =  DateTimeBase.getValue().plusSeconds(1);
+            LocalDateTime newValue = DateTimeBase.getValue().plusSeconds(1);
             DateTimeBase.setValue(newValue);
             System.out.println(DateTimeBase.getValue());
         }, 0, 1, TimeUnit.SECONDS);

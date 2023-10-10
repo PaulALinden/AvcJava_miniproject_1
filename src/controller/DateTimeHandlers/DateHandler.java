@@ -26,8 +26,6 @@ public class DateHandler extends DateTimeHandler {
         }
     }
 
-
-
     @Override
     public boolean canChange() {
         return myTime.getState() == DateTimeMode.CHANGE_MODE && myDate.getState() != DateTimeMode.CHANGE_MODE;
