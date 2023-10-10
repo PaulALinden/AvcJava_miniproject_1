@@ -27,7 +27,7 @@ public class MainController {
         return switch (DateTimeMode.valueOf(input)) {
             case CHANGE_MODE -> resetModeSelection();
             case DISPLAY_TIME, DISPLAY_DATE -> manager.giveInfo();
-            case CHANGE_TIME, CHANGE_DATE -> manager.canChange() ? "true" : "false";
+            case CHANGE_TIME, CHANGE_DATE -> manager.canChange() ? "Change successful" : "Please change mode";
             case TERMINATE -> {
                 System.exit(0);
                 yield null;

@@ -12,7 +12,7 @@ public class ModeButtonPanel extends JPanel {
     private final MainController mainController;
     private final JTextField textField;
 
-    public ModeButtonPanel(MainController timeController, JTextField textField) {
+    protected ModeButtonPanel(MainController timeController, JTextField textField) {
         this.mainController = timeController;
         this.textField = textField;
 
@@ -25,10 +25,10 @@ public class ModeButtonPanel extends JPanel {
 
     private void handleButtonClick(DateTimeMode mode) {
         String result = mainController.handelUserAction(String.valueOf(mode));
-        if (mode == DateTimeMode.CHANGE_TIME && result.equals("true")) {
+        if (mode == DateTimeMode.CHANGE_TIME && !result.equals("Please change mode")) {
             String newTime = getUserTime();
             mainController.getTimeController().changeTime(newTime);
-        } else if (mode == DateTimeMode.CHANGE_DATE && result.equals("true")) {
+        } else if (mode == DateTimeMode.CHANGE_DATE && !result.equals("Please change mode")) {
             String newDate = getUserDate();
             mainController.getDateController().changeDate(newDate);
         }
@@ -36,7 +36,6 @@ public class ModeButtonPanel extends JPanel {
     }
 
     private String getUserTime() {
-
         return (String) JOptionPane.showInputDialog(null, "Enter new time (HH:mm:ss):", "Change Time", JOptionPane.QUESTION_MESSAGE, null, null, LocalDateTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
     }
 

@@ -5,10 +5,10 @@ import controller.MainController;
 import javax.swing.*;
 import java.awt.*;
 
-public class GUI {
+public class MainGUI {
 
-    public GUI(MainController controller) {
-        JFrame frame = new JFrame("User Input GUI");
+    public MainGUI(MainController controller) {
+        JFrame frame = new JFrame("User Input MainGUI");
         Dimension dimension = new Dimension(1200, 600);
         frame.setPreferredSize(dimension);
 

@@ -8,7 +8,7 @@ import model.DateTimeManagers.DateManager;
 import model.DateTimeManagers.DateTimeBase;
 import model.DateTimeManagers.TimeManager;
 import utilitys.DateTimeUpdater;
-import view.GUI;
+import view.MainGUI;
 
 import javax.swing.*;
 
@@ -24,7 +24,7 @@ public class Main {
             final DateTimeHandler dateHandler = new DateHandler(myTime, myDate);
 
             final MainController mainController = new MainController(timeHandler, dateHandler);
-            new GUI(mainController);
+            new MainGUI(mainController);
         });
     }
 }

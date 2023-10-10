@@ -7,8 +7,8 @@ import java.time.LocalDateTime;
 
 public class DateHandler extends DateTimeHandler {
 
-    DateTimeBase myTime;
-    DateTimeBase myDate;
+    final private DateTimeBase myTime;
+    final private DateTimeBase myDate;
 
     public DateHandler(DateTimeBase myTime, DateTimeBase myDate) {
         super(myTime, myDate);
@@ -22,7 +22,7 @@ public class DateHandler extends DateTimeHandler {
             myDate.setState(DateTimeMode.DISPLAY_DATE);
             return myDate.display();
         } else {
-            return "Error in state";
+            return "Please change mode";
         }
     }
 
@@ -37,15 +37,17 @@ public class DateHandler extends DateTimeHandler {
     }
 
     public void changeDate(String newDate) {
-        myDate.setState(DateTimeMode.CHANGE_DATE);
+        if (newDate != null) {
+            myDate.setState(DateTimeMode.CHANGE_DATE);
 
-        String[] parts = newDate.split("-");
-        int newYear = Integer.parseInt(parts[0]);
-        int newMonth = Integer.parseInt(parts[1]);
-        int newDay = Integer.parseInt(parts[2]);
+            String[] parts = newDate.split("-");
+            int newYear = Integer.parseInt(parts[0]);
+            int newMonth = Integer.parseInt(parts[1]);
+            int newDay = Integer.parseInt(parts[2]);
 
-        LocalDateTime modifiedDateTime = LocalDateTime.now().withYear(newYear).withMonth(newMonth).withDayOfMonth(newDay);
+            LocalDateTime modifiedDateTime = LocalDateTime.now().withYear(newYear).withMonth(newMonth).withDayOfMonth(newDay);
 
-        myDate.change(modifiedDateTime);
+            myDate.change(modifiedDateTime);
+        }
     }
 }
